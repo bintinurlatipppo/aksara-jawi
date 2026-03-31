@@ -1,32 +1,61 @@
 const shapeSelect = document.getElementById('shapeSelect');
 const textInput = document.getElementById('textInput');
-const targetPath = document.getElementById('targetPath');
+const fontSizeInput = document.getElementById('fontSize');
+const textTarget = document.getElementById('textTarget');
+const downloadBtn = document.getElementById('downloadBtn');
+const svgElement = document.getElementById('calligraphySVG');
 
-function update() {
-    // Ganti bentuk hewan
-    targetPath.setAttribute('href', '#path_' + shapeSelect.value);
-    
-    // Ganti teks (pastikan teks tidak kosong)
+// Fungsi untuk memperbarui tampilan
+function updatePreview() {
+    const shape = shapeSelect.value;
     const text = textInput.value;
-    targetPath.textContent = text + " " + text + " " + text; // Kita ulangi agar membentuk garis utuh
+    const fSize = fontSizeInput.value;
+
+    // Ganti Path Hewan
+    textTarget.setAttribute('href', '#path_' + shape);
+    
+    // Ganti Teks (Ulangi teks agar memenuhi jalur jika terlalu pendek)
+    // Kita tambahkan spasi di antara pengulangan
+    const repeatedText = (text + "   ").repeat(5); 
+    textTarget.textContent = repeatedText;
+
+    // Ganti Ukuran Font
+    textTarget.parentElement.setAttribute('font-size', fSize);
 }
 
-shapeSelect.addEventListener('change', update);
-textInput.addEventListener('input', update);
+// Event Listeners
+shapeSelect.addEventListener('change', updatePreview);
+textInput.addEventListener('input', updatePreview);
+fontSizeInput.addEventListener('input', updatePreview);
 
-// Jalankan saat pertama load
-window.onload = update;
+// Fungsi Unduh Gambar sebagai PNG
+downloadBtn.addEventListener('click', () => {
+    const svgData = new XMLSerializer().serializeToString(svgElement);
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    
+    // Set resolusi tinggi untuk hasil unduhan
+    canvas.width = 1200;
+    canvas.height = 1200;
 
-// Fitur Download
-document.getElementById('downloadBtn').addEventListener('click', () => {
-    const svg = document.getElementById('svgCanvas');
-    const xml = new XMLSerializer().serializeToString(svg);
-    const svg64 = btoa(unescape(encodeURIComponent(xml)));
-    const b64Start = 'data:image/svg+xml;base64,';
-    const image64 = b64Start + svg64;
+    const svgBlob = new Blob([svgData], {type: "image/svg+xml;charset=utf-8"});
+    const url = URL.createObjectURL(svgBlob);
 
-    const link = document.createElement('a');
-    link.download = 'kaligrafi.svg'; // Simpan sebagai SVG agar kualitas tetap tajam
-    link.href = image64;
-    link.click();
+    img.onload = function() {
+        ctx.fillStyle = "white";
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.drawImage(img, 0, 0, 1200, 1200);
+        
+        const pngUrl = canvas.toDataURL("image/png");
+        const downloadLink = document.createElement("a");
+        downloadLink.href = pngUrl;
+        downloadLink.download = `kaligrafi-${shapeSelect.value}.png`;
+        downloadLink.click();
+        URL.revokeObjectURL(url);
+    };
+    img.src = url;
 });
+
+// Inisialisasi saat pertama kali buka
+window.onload = updatePreview;
