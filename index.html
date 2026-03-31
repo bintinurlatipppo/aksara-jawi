@@ -2,41 +2,63 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Generator Kaligrafi Aksara Jawa</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaligrafi Aksara Jawa Generator</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <div class="controls">
-            <h2>Panel Kontrol</h2>
-            <label>Pilih Hewan:</label>
-            <select id="shapeSelect">
-                <option value="ayam">Ayam Jago</option>
-                <option value="burung">Burung Terbang</option>
-            </select>
+    <div class="app-container">
+        <header>
+            <h1>Pembuat Kaligrafi Aksara Jawa</h1>
+            <p>Ubah teks menjadi seni kaligrafi berbentuk hewan</p>
+        </header>
 
-            <label>Tulis Aksara Jawa:</label>
-            <textarea id="textInput">ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀</textarea>
-            <button id="downloadBtn">Simpan Gambar</button>
-        </div>
+        <div class="main-content">
+            <div class="sidebar">
+                <div class="input-group">
+                    <label for="shapeSelect">Pilih Siluet Hewan</label>
+                    <select id="shapeSelect">
+                        <option value="ayam">Ayam Jago</option>
+                        <option value="burung">Burung Terbang</option>
+                        <option value="gajah">Gajah (Abstrak)</option>
+                    </select>
+                </div>
 
-        <div class="display">
-            <svg id="svgCanvas" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
-                <rect width="100%" height="100%" fill="white"/>
-                
-                <defs>
-                    <path id="path_ayam" d="M300,500 C150,500 50,350 50,250 C50,100 200,50 300,150 C350,50 550,100 550,250 C550,350 450,500 300,500 Z" />
-                    
-                    <path id="path_burung" d="M50,300 Q150,100 300,300 Q450,100 550,300 Q300,500 50,300" />
-                </defs>
+                <div class="input-group">
+                    <label for="textInput">Masukkan Teks Aksara Jawa</label>
+                    <textarea id="textInput" placeholder="Masukkan aksara di sini...">ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀</textarea>
+                </div>
 
-                <text class="javanese-text">
-                    <textPath id="targetPath" href="#path_ayam" startOffset="0">
-                        </textPath>
-                </text>
-            </svg>
+                <div class="input-group">
+                    <label for="fontSize">Ukuran Huruf</label>
+                    <input type="range" id="fontSize" min="10" max="60" value="30">
+                </div>
+
+                <button id="downloadBtn" class="btn-primary">Unduh Gambar (.PNG)</button>
+            </div>
+
+            <div class="preview-area">
+                <div id="canvas-holder">
+                    <svg id="calligraphySVG" viewBox="0 0 600 600" xmlns="http://www.w3.org/2000/svg">
+                        <rect width="100%" height="100%" fill="white" />
+                        
+                        <defs>
+                            <path id="path_ayam" d="M300,550 C200,550 100,450 100,300 C100,150 200,50 300,50 C350,50 400,100 450,150 C550,200 550,400 450,450 C400,500 350,550 300,550 Z" />
+                            
+                            <path id="path_burung" d="M50,300 Q150,50 300,300 Q450,50 550,300 Q300,550 50,300" />
+                            
+                            <path id="path_gajah" d="M200,200 Q300,50 400,200 T400,400 T200,400 T200,200 M200,350 Q100,350 100,500" />
+                        </defs>
+
+                        <text fill="black">
+                            <textPath id="textTarget" href="#path_ayam" startOffset="0%">
+                                </textPath>
+                        </text>
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 
