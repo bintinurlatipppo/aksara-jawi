@@ -3,37 +3,57 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kaligrafi Aksara Jawa Generator</title>
+    <title>Generator Kaligrafi Aksara Jawa Hewan</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Javanese&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <div class="container">
-        <h1>Kaligrafi Aksara Jawa</h1>
+    <div class="main-container">
+        <h1>Kaligrafi Aksara Jawa Dinamis</h1>
         
-        <div class="controls">
-            <label for="shapeSelect">Pilih Bentuk:</label>
-            <select id="shapeSelect">
-                <option value="ayam">Ayam</option>
-                <option value="bangau">Bangau</option>
-                <option value="gajah">Gajah (Abstrak)</option>
-            </select>
+        <div class="app-layout">
+            <div class="controls-panel">
+                <div class="control-group">
+                    <label for="shapeSelect">1. Pilih Bentuk Hewan:</label>
+                    <select id="shapeSelect">
+                        <option value="rooster">Ayam Jago (Gagah)</option>
+                        <option value="birdInFlight">Burung Terbang (Elegan)</option>
+                        <option value="elephantHead">Kepala Gajah (Sabar)</option>
+                    </select>
+                </div>
 
-            <label for="textInput">Masukkan Aksara Jawa:</label>
-            <input type="text" id="textInput" placeholder="ꦤꦩꦱꦪ" value="ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀">
-            
-            <button id="downloadBtn">Unduh Gambar</button>
-        </div>
+                <div class="control-group">
+                    <label for="textInput">2. Masukkan Aksara Jawa:</label>
+                    <textarea id="textInput" rows="4" placeholder="Contoh: ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀">ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀</textarea>
+                    <p class="help-text">*Jika tidak memiliki keyboard Aksara Jawa, Anda bisa menyalin-menempel dari internet.</p>
+                </div>
 
-        <div class="canvas-area">
-            <svg id="kaligrafiSVG" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-                <path id="animalPath" fill="none" stroke="none" d="" />
-                
-                <text font-family="'Tuladha Jejeg', 'Noto Sans Javanese', serif" font-size="24" fill="black">
-                    <textPath id="kaligrafiTextPath" href="#animalPath">
-                        </textPath>
-                </text>
-            </svg>
+                <button id="downloadBtn">Unduh Kaligrafi (.PNG)</button>
+            </div>
+
+            <div class="canvas-panel">
+                <div class="canvas-wrapper">
+                    <svg id="calligraphySVG" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                        
+                        <rect width="100%" height="100%" fill="white" />
+                        
+                        <defs>
+                            <path id="path_rooster" d="M300,50 C200,100 200,300 300,350 L400,350 C500,300 500,100 400,50 L300,50 Z M450,200 C550,250 650,250 750,200" fill="none" stroke="none"/>
+                            
+                            <path id="path_birdInFlight" d="M100,200 C150,100 300,100 350,200 S500,300 550,200 M200,200 C200,300 400,300 400,200" fill="none" stroke="none"/>
+                            
+                            <path id="path_elephantHead" d="M250,150 Q250,50 400,50 T550,150 L550,250 Q550,350 400,350 T250,250 L250,150 M400,100 L400,450 C400,550 300,550 300,450 Q300,400 350,380" fill="none" stroke="none"/>
+                        </defs>
+                        
+                        <text font-family="'Noto Sans Javanese', sans-serif" font-size="28" fill="black">
+                            <textPath id="textPathElement" href="#path_rooster" startOffset="5%">
+                                </textPath>
+                        </text>
+
+                    </svg>
+                </div>
+            </div>
         </div>
     </div>
 
