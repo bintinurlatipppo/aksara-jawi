@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaligrafi Aksara Jawa Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <h1>Kaligrafi Aksara Jawa</h1>
+        
+        <div class="controls">
+            <label for="shapeSelect">Pilih Bentuk:</label>
+            <select id="shapeSelect">
+                <option value="ayam">Ayam</option>
+                <option value="bangau">Bangau</option>
+                <option value="gajah">Gajah (Abstrak)</option>
+            </select>
+
+            <label for="textInput">Masukkan Aksara Jawa:</label>
+            <input type="text" id="textInput" placeholder="ꦤꦩꦱꦪ" value="ꦱꦸꦒꦼꦁꦫꦮꦠꦼꦤ꧀">
+            
+            <button id="downloadBtn">Unduh Gambar</button>
+        </div>
+
+        <div class="canvas-area">
+            <svg id="kaligrafiSVG" viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+                <path id="animalPath" fill="none" stroke="none" d="" />
+                
+                <text font-family="'Tuladha Jejeg', 'Noto Sans Javanese', serif" font-size="24" fill="black">
+                    <textPath id="kaligrafiTextPath" href="#animalPath">
+                        </textPath>
+                </text>
+            </svg>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
