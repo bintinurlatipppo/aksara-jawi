@@ -1,57 +1,129 @@
+/* Pengaturan Dasar */
 body {
-    background-color: #f4f4f4;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
     display: flex;
     justify-content: center;
-    padding: 20px;
+    color: #333;
 }
 
-.container {
-    background: white;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    max-width: 600px;
-    width: 100%;
+h1 {
     text-align: center;
+    color: #000;
+    margin-bottom: 30px;
 }
 
-.controls {
+.main-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    max-width: 1200px;
+    width: 100%;
+}
+
+/* Tata Letak Dua Kolom */
+.app-layout {
+    display: flex;
+    gap: 40px;
+}
+
+/* Panel Kontrol */
+.controls-panel {
+    flex: 1; /* Mengambil 1 bagian ruang */
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-bottom: 20px;
-    text-align: left;
+    gap: 20px;
 }
 
-input, select, button {
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+.control-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+select, textarea {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border-color 0.3s;
+}
+
+select:focus, textarea:focus {
+    border-color: #000;
+    outline: none;
+}
+
+textarea {
+    resize: vertical; /* Hanya bisa ditarik ke bawah */
+    font-family: 'Noto Sans Javanese', sans-serif; /* Agar input Aksara Jawa terlihat benar */
+    font-size: 1.2em;
+}
+
+.help-text {
+    font-size: 0.85em;
+    color: #666;
+    margin-top: -5px;
 }
 
 button {
     background-color: #000;
     color: #fff;
+    border: none;
+    padding: 15px 20px;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-radius: 8px;
     cursor: pointer;
-    transition: 0.3s;
+    transition: background-color 0.3s, transform 0.1s;
+    margin-top: 10px;
 }
 
 button:hover {
     background-color: #333;
 }
 
-.canvas-area {
-    border: 1px solid #eee;
-    background: #fff;
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
+button:active {
+    transform: scale(0.98);
 }
 
+/* Panel Kanvas */
+.canvas-panel {
+    flex: 2; /* Mengambil 2 bagian ruang (lebih lebar) */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fafafa;
+    border: 2px dashed #ccc;
+    border-radius: 12px;
+    padding: 20px;
+}
+
+.canvas-wrapper {
+    width: 100%;
+    max-width: 800px; /* Ukuran maksimal kanvas */
+    height: auto;
+}
+
+/* Styling SVG */
 svg {
     width: 100%;
     height: auto;
-    max-width: 500px;
+    border: 1px solid #eee;
+    background: white; /* Latar belakang kanvas putih */
+}
+
+/* Responsive untuk layar HP */
+@media (max-width: 768px) {
+    .app-layout {
+        flex-direction: column;
+    }
 }
